@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Fuentes -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Corazón Vibrante</title>
+
+    <style>
+      /* ================= RESET ================= */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* ================= BODY MEJORADO ================= */
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(
+          180deg,
+          #fff0f5 0%,
+          #ffe4ec 50%,
+          #ffd6e4 100%
+        );
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      /* Luz mágica central */
+      body::before {
+        content: "";
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(
+          circle,
+          rgba(255, 105, 180, 0.25) 0%,
+          transparent 70%
+        );
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 0;
+        filter: blur(50px);
+      }
+
+      /* Patrón sutil de corazones */
+      body::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><text x='0' y='30' font-size='30' fill='rgba(255,105,180,0.08)'>❤</text></svg>");
+        background-repeat: repeat;
+        opacity: 0.4;
+        pointer-events: none;
+      }
+
+      /* ================= NAVBAR ================= */
+      nav {
+        background: linear-gradient(135deg, #d6457e, #e36892);
+        padding: 0 20px;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-family: "Pacifico", cursive;
+        color: #fff;
+        text-decoration: none;
+        transition: 0.3s;
+      }
+
+      .logo::before {
+        content: "💘";
+        margin-right: 6px;
+      }
+
+      .logo:hover {
+        transform: scale(1.1);
+      }
+
+      .menu {
+        list-style: none;
+        display: flex;
+      }
+
+      .menu li {
+        margin-left: 20px;
+      }
+
+      .menu li a {
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 15px;
+        border-radius: 8px;
+        transition: 0.3s;
+      }
+
+      .menu li a:hover {
+        background: rgba(255, 255, 255, 0.25);
+      }
+
+      /* ================= HAMBURGER MENU ================= */
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 5px;
+      }
+
+      .hamburger span {
+        width: 25px;
+        height: 3px;
+        background-color: #fff;
+        border-radius: 3px;
+        transition: 0.3s;
+      }
+
+      /* ================= CONTENIDO CENTRAL ================= */
+      .main-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 1;
+        text-align: center;
+      }
+
+      /* ================= CORAZÓN ================= */
+      .heart {
+        height: 220px;
+        width: 220px;
+        background-color: #ff2e63;
+        position: relative;
+        transform: rotate(-45deg);
+        box-shadow: -10px 10px 60px rgba(255, 46, 99, 0.6);
+        animation: heartBeat 0.8s ease-in-out infinite;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 13px;
+        text-align: center;
+        padding: 15px;
+        font-family: "Poppins", sans-serif;
+        border-radius: 20px;
+        margin-top: 80px;
+      }
+
+      .heart p {
+        position: absolute;
+        z-index: 10;
+        width: 100%;
+        transform: rotate(45deg) translate(0, -55px);
+        font-weight: 400;
+      }
+
+      @keyframes heartBeat {
+        0% {
+          transform: rotate(-45deg) scale(1.05);
+        }
+        50% {
+          transform: rotate(-45deg) scale(1.15);
+        }
+        100% {
+          transform: rotate(-45deg) scale(1.05);
+        }
+      }
+
+      .heart::before,
+      .heart::after {
+        content: "";
+        position: absolute;
+        height: 220px;
+        width: 220px;
+        background-color: #ff2e63;
+        border-radius: 50%;
+      }
+
+      .heart::before {
+        top: -50%;
+      }
+
+      .heart::after {
+        right: -50%;
+      }
+
+      /* ================= FOOTER ================= */
+      footer {
+        background: linear-gradient(135deg, #d6457e, #e36892);
+        color: #fff;
+        text-align: center;
+        padding: 20px 10px;
+        box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      footer small {
+        opacity: 0.85;
+      }
+
+      /* ================= RESPONSIVE ================= */
+      @media (max-width: 768px) {
+        body::before {
+          width: 300px;
+          height: 300px;
+        }
+
+        nav {
+          padding: 0 15px;
+        }
+
+        .hamburger {
+          display: flex;
+        }
+
+        .menu {
+          position: absolute;
+          top: 100%;
+          right: 0;
+          background: linear-gradient(135deg, #d6457e, #e36892);
+          flex-direction: column;
+          width: 200px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+          border-radius: 0 0 0 12px;
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.3s ease;
+        }
+
+        .menu.active {
+          max-height: 200px;
+        }
+
+        .menu li {
+          margin: 0;
+          width: 100%;
+        }
+
+        .menu li a {
+          display: block;
+          width: 100%;
+          padding: 15px 20px;
+          border-radius: 0;
+        }
+
+        .menu li a:hover {
+          background: rgba(255, 255, 255, 0.15);
+        }
+
+        .logo {
+          font-size: 1.5rem;
+        }
+
+        .menu li {
+          margin-left: 12px;
+        }
+
+        .menu li a {
+          padding: 8px 12px;
+          font-size: 0.9rem;
+        }
+
+        h1 {
+          font-size: 1.6rem !important;
+          padding: 0 20px;
+          margin-bottom: 30px !important;
+        }
+
+        .heart {
+          width: 180px;
+          height: 180px;
+          margin-top: 40px;
+        }
+
+        .heart::before,
+        .heart::after {
+          width: 180px;
+          height: 180px;
+        }
+
+        .heart p {
+          font-size: 12px;
+          transform: rotate(45deg) translate(0, -45px);
+        }
+
+        footer {
+          font-size: 0.9rem;
+          padding: 18px 10px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .logo {
+          font-size: 1.3rem;
+        }
+
+        .logo::before {
+          margin-right: 4px;
+        }
+
+        .menu li {
+          margin-left: 8px;
+        }
+
+        .menu li a {
+          padding: 6px 10px;
+          font-size: 0.85rem;
+        }
+
+        h1 {
+          font-size: 1.3rem !important;
+          padding: 0 15px;
+          margin-bottom: 25px !important;
+        }
+
+        .heart {
+          width: 150px;
+          height: 150px;
+          margin-top: 30px;
+        }
+
+        .heart::before,
+        .heart::after {
+          width: 150px;
+          height: 150px;
+        }
+
+        .heart p {
+          font-size: 11px;
+          transform: rotate(45deg) translate(0, -38px);
+        }
+
+        footer {
+          font-size: 0.85rem;
+          padding: 15px 10px;
+        }
+
+        footer small {
+          font-size: 0.75rem;
+        }
+      }
+
+      @media (max-width: 360px) {
+        .logo {
+          font-size: 1.1rem;
+        }
+
+        .menu li {
+          margin-left: 6px;
+        }
+
+        .menu li a {
+          padding: 5px 8px;
+          font-size: 0.8rem;
+        }
+
+        h1 {
+          font-size: 1.1rem !important;
+          padding: 0 10px;
+          margin-bottom: 20px !important;
+        }
+
+        .heart {
+          width: 130px;
+          height: 130px;
+          margin-top: 20px;
+        }
+
+        .heart::before,
+        .heart::after {
+          width: 130px;
+          height: 130px;
+        }
+
+        .heart p {
+          font-size: 10px;
+          transform: rotate(45deg) translate(0, -33px);
+        }
+      }
+
+      /* Orientación horizontal en móviles */
+      @media (max-height: 600px) and (orientation: landscape) {
+        .heart {
+          width: 140px;
+          height: 140px;
+          margin-top: 20px;
+        }
+
+        .heart::before,
+        .heart::after {
+          width: 140px;
+          height: 140px;
+        }
+
+        .heart p {
+          font-size: 10px;
+          transform: rotate(45deg) translate(0, -35px);
+        }
+
+        h1 {
+          font-size: 1.2rem !important;
+          margin-bottom: 15px !important;
+        }
+
+        footer {
+          padding: 12px 10px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav>
+      <div class="nav-container">
+        <a href="#" class="logo">Para Tati</a>
+
+        <div class="hamburger" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <ul class="menu" id="menu">
+          <li><a href="inicio.html">Inicio</a></li>
+          <li><a href="#">Corazoncito de 🐻</a></li>
+          <li><a href="cartamami.html">Carta para mami 💖</a></li>
+          <li><a href="proximaparada.html">Proxima parada 💌</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="main-content">
+      <h1
+        style="
+          font-family: &quot;Pacifico&quot;, cursive;
+          color: #d6457e;
+          margin-bottom: 50px;
+          font-size: 2rem;
+        "
+      >
+        Así está el corazón de Osi al ver a mami 💖
+      </h1>
+
+      <div class="heart">
+        <p>
+          Mi capibarita hermosa, mi Tatinha, gracias por llenar mi vida de amor
+          y tranquilidad; contigo todo es más bonito y mi corazón se siente en
+          casa. Eres mi persona favorita y el amor que elijo cada día. ❤️
+        </p>
+      </div>
+    </div>
+
+    <footer>
+      <p>
+        Te amo y te amare toda la vida que sean muchos san valentines a tu lado
+        amor 💌
+      </p>
+      <small>&copy; 2026 San Valentín osito y capibarita</small>
+    </footer>
+
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("menu");
+        menu.classList.toggle("active");
+      }
+
+      // Cerrar menú al hacer clic en un enlace
+      document.querySelectorAll(".menu a").forEach((link) => {
+        link.addEventListener("click", () => {
+          document.getElementById("menu").classList.remove("active");
+        });
+      });
+
+      // Cerrar menú al hacer clic fuera
+      document.addEventListener("click", (e) => {
+        const menu = document.getElementById("menu");
+        const hamburger = document.querySelector(".hamburger");
+        if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+          menu.classList.remove("active");
+        }
+      });
+    </script>
+  </body>
+</html>

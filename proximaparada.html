@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Fuentes -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Nuestra Cita Especial</title>
+
+    <style>
+      /* ================= RESET ================= */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* ================= BODY MEJORADO ================= */
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(
+          180deg,
+          #fff0f5 0%,
+          #ffe4ec 50%,
+          #ffd6e4 100%
+        );
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      /* Luz mágica central */
+      body::before {
+        content: "";
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(
+          circle,
+          rgba(255, 105, 180, 0.25) 0%,
+          transparent 70%
+        );
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 0;
+        filter: blur(50px);
+      }
+
+      /* Patrón sutil de corazones */
+      body::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><text x='0' y='30' font-size='30' fill='rgba(255,105,180,0.08)'>❤</text></svg>");
+        background-repeat: repeat;
+        opacity: 0.4;
+        pointer-events: none;
+      }
+
+      /* ================= NAVBAR ================= */
+      nav {
+        background: linear-gradient(135deg, #d6457e, #e36892);
+        padding: 0 20px;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-family: "Pacifico", cursive;
+        color: #fff;
+        text-decoration: none;
+        transition: 0.3s;
+      }
+
+      .logo::before {
+        content: "💘";
+        margin-right: 6px;
+      }
+
+      .logo:hover {
+        transform: scale(1.1);
+      }
+
+      .menu {
+        list-style: none;
+        display: flex;
+      }
+
+      .menu li {
+        margin-left: 20px;
+      }
+
+      .menu li a {
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 15px;
+        border-radius: 8px;
+        transition: 0.3s;
+      }
+
+      .menu li a:hover {
+        background: rgba(255, 255, 255, 0.25);
+      }
+
+      /* ================= HAMBURGER MENU ================= */
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 5px;
+      }
+
+      .hamburger span {
+        width: 25px;
+        height: 3px;
+        background-color: #fff;
+        border-radius: 3px;
+        transition: 0.3s;
+      }
+
+      /* ================= CONTENIDO CENTRAL ================= */
+      .main-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 1;
+        padding: 60px 20px;
+      }
+
+      .content-wrapper {
+        max-width: 900px;
+        width: 100%;
+      }
+
+      .title-section {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .main-title {
+        font-family: "Pacifico", cursive;
+        color: #d6457e;
+        font-size: 3rem;
+        margin-bottom: 15px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .subtitle {
+        font-size: 1.3rem;
+        color: #e36892;
+        font-weight: 300;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .date-badge {
+        display: inline-block;
+        background: linear-gradient(135deg, #ff477e, #ff6b9d);
+        color: white;
+        padding: 15px 35px;
+        border-radius: 50px;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 20px 0;
+        box-shadow: 0 8px 20px rgba(255, 71, 126, 0.3);
+        font-family: "Poppins", sans-serif;
+      }
+
+      .restaurant-card {
+        background: white;
+        border-radius: 20px;
+        padding: 40px;
+        margin: 30px 0;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border: 3px solid #ffe3ed;
+      }
+
+      .restaurant-name {
+        font-family: "Pacifico", cursive;
+        color: #d6457e;
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .description {
+        font-family: "Poppins", sans-serif;
+        color: #555;
+        font-size: 1.1rem;
+        line-height: 1.8;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      /* ================= PHOTO SECTIONS ================= */
+      .photos-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .photo-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+        border: 2px solid #ffe3ed;
+      }
+
+      .photo-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 35px rgba(255, 71, 126, 0.2);
+      }
+
+      .photo-img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        display: block;
+      }
+
+      .photo-caption {
+        padding: 20px;
+        text-align: center;
+      }
+
+      .photo-caption h3 {
+        font-family: "Pacifico", cursive;
+        color: #d6457e;
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+      }
+
+      .photo-caption p {
+        color: #666;
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      /* ================= FOOTER ================= */
+      footer {
+        background: linear-gradient(135deg, #d6457e, #e36892);
+        color: #fff;
+        text-align: center;
+        padding: 20px 10px;
+        box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      footer small {
+        opacity: 0.85;
+      }
+
+      /* ================= RESPONSIVE ================= */
+      @media (max-width: 768px) {
+        body::before {
+          width: 300px;
+          height: 300px;
+        }
+
+        nav {
+          padding: 0 15px;
+        }
+
+        .hamburger {
+          display: flex;
+        }
+
+        .menu {
+          position: absolute;
+          top: 100%;
+          right: 0;
+          background: linear-gradient(135deg, #d6457e, #e36892);
+          flex-direction: column;
+          width: 200px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+          border-radius: 0 0 0 12px;
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.3s ease;
+        }
+
+        .menu.active {
+          max-height: 300px;
+        }
+
+        .menu li {
+          margin: 0;
+          width: 100%;
+        }
+
+        .menu li a {
+          display: block;
+          width: 100%;
+          padding: 15px 20px;
+          border-radius: 0;
+        }
+
+        .menu li a:hover {
+          background: rgba(255, 255, 255, 0.15);
+        }
+
+        .logo {
+          font-size: 1.5rem;
+        }
+
+        .main-content {
+          padding: 40px 15px;
+        }
+
+        .main-title {
+          font-size: 2.2rem;
+        }
+
+        .subtitle {
+          font-size: 1.1rem;
+        }
+
+        .date-badge {
+          font-size: 1.2rem;
+          padding: 12px 25px;
+        }
+
+        .restaurant-card {
+          padding: 25px;
+        }
+
+        .restaurant-name {
+          font-size: 2rem;
+        }
+
+        .description {
+          font-size: 1rem;
+        }
+
+        .photos-container {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .photo-img {
+          height: 250px;
+        }
+
+        footer {
+          font-size: 0.9rem;
+          padding: 18px 10px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .logo {
+          font-size: 1.3rem;
+        }
+
+        .logo::before {
+          margin-right: 4px;
+        }
+
+        .main-title {
+          font-size: 1.8rem;
+        }
+
+        .subtitle {
+          font-size: 1rem;
+        }
+
+        .date-badge {
+          font-size: 1.1rem;
+          padding: 10px 20px;
+        }
+
+        .restaurant-card {
+          padding: 20px;
+        }
+
+        .restaurant-name {
+          font-size: 1.7rem;
+        }
+
+        .description {
+          font-size: 0.95rem;
+        }
+
+        .photo-img {
+          height: 220px;
+        }
+
+        footer {
+          font-size: 0.85rem;
+          padding: 15px 10px;
+        }
+
+        footer small {
+          font-size: 0.75rem;
+        }
+      }
+
+      @media (max-width: 360px) {
+        .logo {
+          font-size: 1.1rem;
+        }
+
+        .main-title {
+          font-size: 1.6rem;
+        }
+
+        .restaurant-name {
+          font-size: 1.5rem;
+        }
+
+        .photo-img {
+          height: 200px;
+        }
+      }
+
+      /* Orientación horizontal en móviles */
+      @media (max-height: 600px) and (orientation: landscape) {
+        .main-content {
+          padding: 30px 15px;
+        }
+
+        .main-title {
+          font-size: 1.8rem;
+          margin-bottom: 10px;
+        }
+
+        .date-badge {
+          margin: 10px 0;
+        }
+
+        .restaurant-card {
+          padding: 20px;
+        }
+
+        .photo-img {
+          height: 200px;
+        }
+
+        footer {
+          padding: 12px 10px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav>
+      <div class="nav-container">
+        <a href="#" class="logo">Para Tati</a>
+
+        <div class="hamburger" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <ul class="menu" id="menu">
+          <li><a href="inicio.html">Inicio</a></li>
+          <li><a href="inicio copy.html">Corazoncito de 🐻</a></li>
+          <li><a href="cartamami.html">Carta para mami 💖</a></li>
+          <li><a href="#">Próxima parada 💌</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="main-content">
+      <div class="content-wrapper">
+        <div class="title-section">
+          <h1 class="main-title">¡Tenemos una cita especial! 💕</h1>
+          <p class="subtitle">Una noche mágica nos espera</p>
+          <div class="date-badge">📅 14 de Febrero 2026</div>
+        </div>
+
+        <div class="restaurant-card">
+          <h2 class="restaurant-name">Malbec 121 🍷</h2>
+          <p class="description">
+            Este San Valentín quiero que lo vivamos bonito, mami. He preparado
+            algo especial para nosotros: una salida en la tarde a Malbec 121, un
+            lugar súper acogedor que siento que va perfecto con nosotros. Me
+            imagino una tarde tranquila, conversando sin apuro, riéndonos,
+            brindando y disfrutando algo rico mientras el tiempo pasa lento solo
+            para los dos.
+            <br /><br />
+            Tengo muchas ganas de ver tu sonrisa cuando estemos ahí,
+            compartiendo ese momento tan nuestro. No es solo el lugar, es el
+            hecho de estar contigo, disfrutar tu compañía, molestarnos un
+            poquito y seguir creando recuerdos que después vamos a recordar con
+            cariño.
+            <br /><br />
+            Gracias por estar a mi lado. No necesito nada más que tu compañía
+            para que cualquier plan sea perfecto. Te amo muchísimo. ❤️✨
+          </p>
+        </div>
+
+        <div class="photos-container">
+          <div class="photo-card">
+            <img
+              src="/imagenes/caption.jpg"
+              alt="Nuestro restaurante especial"
+              class="photo-img"
+            />
+            <div class="photo-caption">
+              <h3>El Lugar</h3>
+              <p>
+                Aquí es donde viviremos nuestra tarde mágica. Un espacio pensado
+                para enamorados como nosotros.
+              </p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img
+              src="/imagenes/reserva.png"
+              alt="Captura de la reserva confirmada"
+              class="photo-img"
+            />
+            <div class="photo-caption">
+              <h3>Todo Listo</h3>
+              <p>
+                La reserva está confirmada. Solo falta que llegue ese día
+                especial para disfrutar juntos.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>
+        Te amo y te amaré toda la vida, que sean muchos San Valentines a tu lado
+        amor 💌
+      </p>
+      <small>&copy; 2026 San Valentín osito y capibarita</small>
+    </footer>
+
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("menu");
+        menu.classList.toggle("active");
+      }
+
+      // Cerrar menú al hacer clic en un enlace
+      document.querySelectorAll(".menu a").forEach((link) => {
+        link.addEventListener("click", () => {
+          document.getElementById("menu").classList.remove("active");
+        });
+      });
+
+      // Cerrar menú al hacer clic fuera
+      document.addEventListener("click", (e) => {
+        const menu = document.getElementById("menu");
+        const hamburger = document.querySelector(".hamburger");
+        if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+          menu.classList.remove("active");
+        }
+      });
+    </script>
+  </body>
+</html>

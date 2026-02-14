@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Fuentes -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Carta para mami</title>
+
+    <style>
+      /* ================= RESET ================= */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #fff;
+        --bg-color: #ffebf2;
+        --bg-envelope-color: #ffe3ed;
+        --envelope-tab: #ffccd5;
+        --envelope-cover: #ffc1d1;
+        --shadow-color: rgba(0, 0, 0, 0.2);
+        --txt-color: #003049;
+        --heart-color: #ff477e;
+      }
+
+      /* ================= BODY MEJORADO ================= */
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(
+          180deg,
+          #fff0f5 0%,
+          #ffe4ec 50%,
+          #ffd6e4 100%
+        );
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      /* Luz mágica central */
+      body::before {
+        content: "";
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(
+          circle,
+          rgba(255, 105, 180, 0.25) 0%,
+          transparent 70%
+        );
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 0;
+        filter: blur(50px);
+      }
+
+      /* Patrón sutil de corazones */
+      body::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><text x='0' y='30' font-size='30' fill='rgba(255,105,180,0.08)'>❤</text></svg>");
+        background-repeat: repeat;
+        opacity: 0.4;
+        pointer-events: none;
+      }
+
+      /* ================= NAVBAR ================= */
+      nav {
+        background: linear-gradient(135deg, #d6457e, #e36892);
+        padding: 0 20px;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-family: "Pacifico", cursive;
+        color: #fff;
+        text-decoration: none;
+        transition: 0.3s;
+      }
+
+      .logo::before {
+        content: "💘";
+        margin-right: 6px;
+      }
+
+      .logo:hover {
+        transform: scale(1.1);
+      }
+
+      .menu {
+        list-style: none;
+        display: flex;
+      }
+
+      .menu li {
+        margin-left: 20px;
+      }
+
+      .menu li a {
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 15px;
+        border-radius: 8px;
+        transition: 0.3s;
+      }
+
+      .menu li a:hover {
+        background: rgba(255, 255, 255, 0.25);
+      }
+
+      /* ================= HAMBURGER MENU ================= */
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 5px;
+      }
+
+      .hamburger span {
+        width: 25px;
+        height: 3px;
+        background-color: #fff;
+        border-radius: 3px;
+        transition: 0.3s;
+      }
+
+      /* ================= CONTENIDO CENTRAL ================= */
+      .main-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 1;
+        padding: 40px 20px;
+      }
+
+      /* ================= LETTER STYLES ================= */
+      h1 {
+        font-family: "Marck Script", serif;
+        text-align: center;
+        font-size: 60px;
+        margin-bottom: 50px;
+        color: #444;
+      }
+
+      .container {
+        width: 400px;
+      }
+
+      .container > .envelope-wrapper {
+        position: relative;
+        background-color: var(--bg-envelope-color);
+        box-shadow: 0 0 40px var(--shadow-color);
+        border-radius: 15px;
+      }
+
+      .envelope-wrapper > .envelope {
+        position: relative;
+        width: 400px;
+        height: 300px;
+      }
+
+      .envelope-wrapper > .envelope::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 4;
+        border-top: 180px solid var(--envelope-tab);
+        border-right: 200px solid transparent;
+        border-left: 200px solid transparent;
+        transform-origin: top;
+        transition: all 0.5s ease-in-out 0.7s;
+        border-radius: 10px;
+      }
+
+      .tap-right {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        clip-path: polygon(100% 0, 0 100%, 100% 100%);
+        transform: rotate(-90deg, 90deg);
+        border-bottom-right-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        background-color: var(--envelope-cover);
+      }
+
+      .tap-left {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        clip-path: polygon(0 0, 0% 100%, 100% 100%);
+        background-color: var(--envelope-cover);
+        transform: rotate(90deg, -90deg);
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
+
+      .envelope-wrapper.disable-envelope .envelope::before {
+        pointer-events: none;
+      }
+
+      .envelope > .letter {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--primary);
+        text-align: center;
+        box-shadow: 0 0 5px var(--shadow-color);
+        padding: 20px;
+        border-radius: 10px;
+        transition: transform 0.5s ease-in-out;
+      }
+
+      .envelope > .letter > .text {
+        font-family:
+          "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+        color: var(--txt-color);
+        text-align: left;
+        font-size: 12px;
+        border: 3px dotted var(--txt-color);
+        padding: 10px;
+        height: 100%;
+        line-height: 16px;
+        cursor: pointer;
+        overflow: scroll;
+      }
+
+      .heart {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 30px;
+        height: 30px;
+        background: var(--heart-color);
+        transform: translate(-50%, 0%) rotate(45deg);
+        transition: transform 0.5s ease-in-out 1s;
+        box-shadow: 0 1px 6px var(--shadow-color);
+        cursor: pointer;
+        z-index: 999;
+      }
+
+      .heart:before,
+      .heart:after {
+        content: "";
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background-color: var(--heart-color);
+        border-radius: 80%;
+      }
+
+      .heart:before {
+        top: -15px;
+      }
+
+      .heart:after {
+        right: 15px;
+      }
+
+      .flap > .envelope:before {
+        transform: rotateX(180deg);
+        z-index: 0;
+      }
+
+      .flap > .heart {
+        transform: rotate(90deg);
+        transition-delay: 0.4s;
+      }
+
+      .letter.letter-opening {
+        transform: translateY(-290px);
+        animation-delay: 0.5s;
+        transition: transform 0.5s ease-in-out;
+      }
+
+      .letter.closing-letter {
+        transform: translateY(-290px);
+        transition: transform 0.5s ease-in-out;
+        z-index: 10000;
+      }
+
+      .letter.opened {
+        z-index: 10000;
+      }
+
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: transparent;
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--envelope-cover);
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--heart-color);
+      }
+
+      /* ================= FOOTER ================= */
+      footer {
+        background: linear-gradient(135deg, #d6457e, #e36892);
+        color: #fff;
+        text-align: center;
+        padding: 20px 10px;
+        box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      footer small {
+        opacity: 0.85;
+      }
+
+      /* ================= RESPONSIVE ================= */
+      @media (max-width: 768px) {
+        body::before {
+          width: 300px;
+          height: 300px;
+        }
+
+        nav {
+          padding: 0 15px;
+        }
+
+        .hamburger {
+          display: flex;
+        }
+
+        .menu {
+          position: absolute;
+          top: 100%;
+          right: 0;
+          background: linear-gradient(135deg, #d6457e, #e36892);
+          flex-direction: column;
+          width: 200px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+          border-radius: 0 0 0 12px;
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.3s ease;
+        }
+
+        .menu.active {
+          max-height: 300px;
+        }
+
+        .menu li {
+          margin: 0;
+          width: 100%;
+        }
+
+        .menu li a {
+          display: block;
+          width: 100%;
+          padding: 15px 20px;
+          border-radius: 0;
+        }
+
+        .menu li a:hover {
+          background: rgba(255, 255, 255, 0.15);
+        }
+
+        .logo {
+          font-size: 1.5rem;
+        }
+
+        h1 {
+          font-size: 45px;
+          margin-bottom: 30px;
+        }
+
+        footer {
+          font-size: 0.9rem;
+          padding: 18px 10px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .logo {
+          font-size: 1.3rem;
+        }
+
+        .logo::before {
+          margin-right: 4px;
+        }
+
+        h1 {
+          font-size: 35px;
+          margin-bottom: 25px;
+        }
+
+        footer {
+          font-size: 0.85rem;
+          padding: 15px 10px;
+        }
+
+        footer small {
+          font-size: 0.75rem;
+        }
+      }
+
+      @media screen and (max-width: 400px) {
+        .container {
+          width: 300px;
+        }
+
+        .envelope-wrapper > .envelope {
+          position: relative;
+          width: 300px;
+          height: 250px;
+        }
+
+        .tap-left,
+        .tap-right {
+          width: 100%;
+        }
+
+        .envelope-wrapper > .envelope::before {
+          border-top: 150px solid var(--envelope-tab);
+          border-right: 150px solid transparent;
+          border-left: 150px solid transparent;
+        }
+
+        .logo {
+          font-size: 1.1rem;
+        }
+
+        h1 {
+          font-size: 30px;
+        }
+      }
+
+      @media (max-width: 360px) {
+        h1 {
+          font-size: 28px;
+        }
+      }
+
+      /* Orientación horizontal en móviles */
+      @media (max-height: 600px) and (orientation: landscape) {
+        h1 {
+          font-size: 30px;
+          margin-bottom: 20px;
+        }
+
+        .main-content {
+          padding: 20px 10px;
+        }
+
+        footer {
+          padding: 12px 10px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav>
+      <div class="nav-container">
+        <a href="#" class="logo">Para Tati</a>
+
+        <div class="hamburger" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <ul class="menu" id="menu">
+          <li><a href="inicio.html">Inicio</a></li>
+          <li><a href="inicio copy.html">Corazoncito de 🐻</a></li>
+          <li><a href="#">Carta para mami 💖</a></li>
+          <li><a href="proximaparada.html">Proxima parada 💌</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="main-content">
+      <h1>¡Feliz San Valentín! ❤️</h1>
+      <div class="container">
+        <div class="envelope-wrapper">
+          <div class="envelope">
+            <div class="letter">
+              <div class="text">
+                <strong>Querida Tatiana (alias mi capibarita hermosa)</strong>
+                <p>
+                  Hoy es <strong>San Valentín</strong>, pero siendo sinceros,
+                  contigo cualquier día parece fecha especial (aunque seas
+                  picona). Desde que llegaste a mi vida, todo a mejorado;
+                  literal siento que eh madurado como persona, soy yo mismo
+                  cuando estoy a tu lado y siento que soy mas responsable con
+                  mis cosas sobre todo que no me debo dar por vencido y encima
+                  soportas mi lado molestoso. Si fueras una base de datos, me
+                  encantaría meter mi script en SQLaso y ejecutar un
+                  procedimiento almacenado llamado "amor eterno", sin rollback y
+                  con commit automático cada vez que sonríes. Gracias por ser
+                  tú, por tu dulzura, por tu carácter, por tu manera tan bonita
+                  de querer.
+                  <br />
+                  <strong>Feliz San Valentín</strong>, mi capibarita favorita
+                  (sí, lo voy a seguir diciendo). <br />
+                  Con amor, <br />
+                  Julio ❤️ <br />
+                  <span style="font-size: 0.9em; color: grey">
+                    PD: Si mi corazón fuera un programa, su salida siempre
+                    sería: </span
+                  ><br />
+                  <code>"Te elijo hoy y siempre."</code>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="heart"></div>
+          <div class="tap-right"></div>
+          <div class="tap-left"></div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>
+        Te amo y te amare toda la vida que sean muchos san valentines a tu lado
+        amor 💌
+      </p>
+      <small>&copy; 2026 San Valentín osito y capibarita</small>
+    </footer>
+
+    <script>
+      // Menu toggle
+      function toggleMenu() {
+        const menu = document.getElementById("menu");
+        menu.classList.toggle("active");
+      }
+
+      // Cerrar menú al hacer clic en un enlace
+      document.querySelectorAll(".menu a").forEach((link) => {
+        link.addEventListener("click", () => {
+          document.getElementById("menu").classList.remove("active");
+        });
+      });
+
+      // Cerrar menú al hacer clic fuera
+      document.addEventListener("click", (e) => {
+        const menu = document.getElementById("menu");
+        const hamburger = document.querySelector(".hamburger");
+        if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+          menu.classList.remove("active");
+        }
+      });
+
+      // Letter animation
+      const envelope = document.querySelector(".envelope-wrapper");
+      const letter = document.querySelector(".letter");
+
+      document.addEventListener("click", (e) => {
+        if (
+          e.target.matches(".envelope") ||
+          e.target.matches(".tap-right") ||
+          e.target.matches(".tap-left") ||
+          e.target.matches(".heart")
+        ) {
+          envelope.classList.toggle("flap");
+
+          if (!letter.classList.contains("opened")) {
+            setTimeout(() => {
+              letter.classList.add("letter-opening");
+
+              setTimeout(() => {
+                letter.classList.remove("letter-opening");
+                letter.classList.add("opened");
+              }, 500);
+            }, 1000);
+          }
+        } else if (e.target.matches(".envelope *")) {
+          envelope.classList.remove("flap");
+          if (letter.classList.contains("opened")) {
+            letter.classList.add("closing-letter");
+            setTimeout(() => {
+              letter.classList.remove("closing-letter");
+              letter.classList.remove("opened");
+            }, 500);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
